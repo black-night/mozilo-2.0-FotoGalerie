@@ -1,0 +1,9 @@
+
+config_fotogallery_plugin_name              = blacknight - Responsive FotoGalerie
+config_fotogallery_plugin_desc              = Erstellt eine Foto-Galerie. <br /> <br /> Fotos werden als Randloses Grid dargestellt. Für optimale Ergebnisse sollten die Vorschaubilder alle die gleiche Höhe haben (z.B. Einstellung 1000x150)<br /><br />Bei aktiviertem JavaScript wird eine Slideshow (auf Grundlage von <a href="http://glisse.victorcoulon.fr/">Glisse.js</a>) angezeigt.
+config_fotogallery_changeSpeed              = Zeitspannen beim Wechsel zwischen zwei Fotos (Standard 1000).
+config_fotogallery_Speed                    = Zeitspannen beim Starten/Beenden der Slideshow (Standard 300).
+config_fotogallery_effect                   = Überblendungseffekt (Standard bounce).
+config_fotogallery_fullscreen               = Bilder im Vollbildmodus darstellen (Standard nein).
+config_fotogallery_number_regex_error       = nur Zahlen erlaubt!
+config_fotogallery_copyright                = Copyright Information, die unter der Gallery sowie in der Einzeldarstellung angezeigt wird. (HTML ist erlaubt)

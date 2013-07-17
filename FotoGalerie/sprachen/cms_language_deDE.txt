@@ -1,0 +1,4 @@
+
+message_gallerydir_error_0              = Es wurde kein Galerieverzeichnis angegeben!
+message_galleryempty_0                  = Diese Galerie enthält keine Bilder.
+
