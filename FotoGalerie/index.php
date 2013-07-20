@@ -2,7 +2,7 @@
 
 /***************************************************************
 *
-* Plugin für moziloCMS, welches Fotos mit Hilfe von Glisse.js (http://glisse.victorcoulon.fr/) anzeigt.
+* Plugin fuer moziloCMS, welches Fotos mit Hilfe von Glisse.js (http://glisse.victorcoulon.fr/) anzeigt.
 * by blacknight - Daniel Neef
 * 
 ***************************************************************/
@@ -11,7 +11,7 @@ class FotoGalerie extends Plugin {
 
     /***************************************************************
     * 
-    * Gibt den HTML-Code zurück, mit dem die Plugin-Variable ersetzt 
+    * Gibt den HTML-Code zurueck, mit dem die Plugin-Variable ersetzt 
     * wird.
     * 
     ***************************************************************/
@@ -40,7 +40,7 @@ class FotoGalerie extends Plugin {
         // Galerieverzeichnis einlesen
         $picarray = getDirAsArray($GALERIE_DIR,"img");
         $i = 0;
-        $result = "<div id=\"fotogalerie\">";
+        $result = "<div id=\"".$this->getIDName($gal_request)."\">";
         for ($i=0; $i<count($picarray); $i++) {        
           $result .=  "<a href=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" class=\"thumbnail-link\">"
                       ."<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$i],true)."\" "
@@ -69,7 +69,7 @@ class FotoGalerie extends Plugin {
     
     /***************************************************************
     * 
-    * Gibt die Konfigurationsoptionen als Array zurück.
+    * Gibt die Konfigurationsoptionen als Array zurueck.
     * 
     ***************************************************************/
     function getConfig() {
@@ -111,6 +111,10 @@ class FotoGalerie extends Plugin {
         		"type" => "checkbox",
         		"description" => $lang_gallery_admin->get("config_fotogallery_fullscreen")        		
         );
+        $config['idwithgalleryname'] = array(
+        		"type" => "checkbox",
+        		"description" => $lang_gallery_admin->get("config_fotogallery_idwithgalleryname")
+        );        
         return $config;            
     } // function getConfig
     
@@ -118,7 +122,7 @@ class FotoGalerie extends Plugin {
     
     /***************************************************************
     * 
-    * Gibt die Plugin-Infos als Array zurück. 
+    * Gibt die Plugin-Infos als Array zurueck. 
     * 
     ***************************************************************/
     function getInfo() {
@@ -129,7 +133,7 @@ class FotoGalerie extends Plugin {
         $lang_gallery_admin = new Properties($dir."sprachen/admin_language_".$language.".txt",false);        
         $info = array(
             // Plugin-Name
-            "<b>".$lang_gallery_admin->get("config_fotogallery_plugin_name")."</b> \$Revision: 1 $",
+            "<b>".$lang_gallery_admin->get("config_fotogallery_plugin_name")."</b> \$Revision: 2 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
@@ -190,14 +194,25 @@ class FotoGalerie extends Plugin {
     	}
     } //function getEffect
     
+    function getBoolean($value) {
+    	return (strtoupper($value)=="TRUE");
+    } //function getBoolean
+    
     function getBooleanStr($value) {
-    	if ($value) {
+    	if ($this->getBoolean($value)) {
     		return "true";
     	} else {
     		return "false";
     	}
-    } //getBooleanStr
+    } //function getBooleanStr
+    
+    function getIDName($galleryName) {
+    	if ($this->getBoolean($this->settings->get("idwithgalleryname"))) {
+    		return "fotogalerie".$galleryName;
+    	} else {
+    		return "fotogalerie";
+    	}
+    } //function getBooleanStr    
 } // class FotoGalerie
 
 ?>
-    
