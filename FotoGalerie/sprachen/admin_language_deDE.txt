@@ -1,6 +1,5 @@
-
 config_fotogallery_plugin_name              = black-night - Responsive FotoGalerie
-config_fotogallery_plugin_desc              = Erstellt eine Foto-Galerie. <br /> <br /> Fotos werden als Randloses Grid dargestellt. Für optimale Ergebnisse sollten die Vorschaubilder alle die gleiche Höhe haben (z.B. Einstellung 1000x150)<br /><br />Bei aktiviertem JavaScript wird eine Slideshow (auf Grundlage von <a href="http://glisse.victorcoulon.fr/">Glisse.js</a>) angezeigt.<br /><br /><span style="font-weight:bold;">Nutzung:</span><br />{Galerie|moziloCMS} fügt die Galerie "moziloCMS" ein
+config_fotogallery_plugin_desc              = Erstellt eine Foto-Galerie. <br /> <br /> Fotos werden als Randloses Grid dargestellt. Für optimale Ergebnisse sollten die Vorschaubilder alle die gleiche Höhe haben (z.B. Einstellung 1000x150)<br /><br />Bei aktiviertem JavaScript wird eine Slideshow (auf Grundlage von <a href="http://glisse.victorcoulon.fr/">Glisse.js</a>) angezeigt.<br /><br /><span style="font-weight:bold;">Nutzung:</span><br />{Galerie|moziloCMS} fügt die Galerie "moziloCMS" ein<br />{Galerie|LetztesFoto,moziloCMS} fügt das letzte Foto der Galerie "moziloCMS" ein<br />{Galerie|ErstesFoto,moziloCMS} fügt das erstes Foto der Galerie "moziloCMS" ein<br />{Galerie|NeustesFoto,moziloCMS} fügt das neuste Foto der Galerie "moziloCMS" ein<br />{Galerie|ÄltestesFoto,moziloCMS} fügt das älteste Foto der Galerie "moziloCMS" ein
 config_fotogallery_changeSpeed              = Zeitspannen beim Wechsel zwischen zwei Fotos (Standard 1000).
 config_fotogallery_Speed                    = Zeitspannen beim Starten/Beenden der Slideshow (Standard 300).
 config_fotogallery_effect                   = Überblendungseffekt (Standard bounce).
@@ -8,3 +7,7 @@ config_fotogallery_fullscreen               = Bilder im Vollbildmodus darstellen
 config_fotogallery_number_regex_error       = nur Zahlen erlaubt!
 config_fotogallery_copyright                = Copyright Information, die unter der Gallery sowie in der Einzeldarstellung angezeigt wird. (HTML ist erlaubt)
 config_fotogallery_idwithgalleryname        = &lt;div id="fotogalerie"&gt; um Galeriename erweitern. (Standard nein. Sinnvoll, wenn Mehrer Galerien auf einer Inhaltsseite verwendet werden).
+config_fotogallery_plugin_first             = Liefert das erste Foto der Galerie
+config_fotogallery_plugin_last              = Liefert das letzte Foto der Galerie
+config_fotogallery_plugin_new               = Liefert das neuste Foto der Galerie
+config_fotogallery_plugin_old               = Liefert das älteste Foto der Galerie
