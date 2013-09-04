@@ -1,5 +1,5 @@
 
-config_fotogallery_plugin_name              = blacknight - Responsive FotoGalerie
+config_fotogallery_plugin_name              = black-night - Responsive FotoGalerie
 config_fotogallery_plugin_desc              = Erstellt eine Foto-Galerie. <br /> <br /> Fotos werden als Randloses Grid dargestellt. Für optimale Ergebnisse sollten die Vorschaubilder alle die gleiche Höhe haben (z.B. Einstellung 1000x150)<br /><br />Bei aktiviertem JavaScript wird eine Slideshow (auf Grundlage von <a href="http://glisse.victorcoulon.fr/">Glisse.js</a>) angezeigt.<br /><br /><span style="font-weight:bold;">Nutzung:</span><br />{Galerie|moziloCMS} fügt die Galerie "moziloCMS" ein
 config_fotogallery_changeSpeed              = Zeitspannen beim Wechsel zwischen zwei Fotos (Standard 1000).
 config_fotogallery_Speed                    = Zeitspannen beim Starten/Beenden der Slideshow (Standard 300).

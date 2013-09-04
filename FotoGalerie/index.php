@@ -133,15 +133,15 @@ class FotoGalerie extends Plugin {
         $lang_gallery_admin = new Properties($dir."sprachen/admin_language_".$language.".txt",false);        
         $info = array(
             // Plugin-Name
-            "<b>".$lang_gallery_admin->get("config_fotogallery_plugin_name")."</b> \$Revision: 2 $",
+            "<b>".$lang_gallery_admin->get("config_fotogallery_plugin_name")."</b> \$Revision: 3 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
             $lang_gallery_admin->get("config_fotogallery_plugin_desc"),
             // Name des Autors
-           "blacknight",
+           "black-night",
             // Download-URL
-            "www.black-night.org",
+            array("http://software.black-night.org","Software by black-night"),
             # Platzhalter => Kurzbeschreibung
             array('{FotoGalerie|}' => $lang_gallery_admin->get("config_fotogallery_plugin_name"))
             );
