@@ -18,7 +18,7 @@ class FotoGalerie extends Plugin {
 	const FG_LAST = "LetztesFoto";
 	const FG_FIRST = "ErstesFoto";
 	const FG_NEW = "NeustesFoto";
-	const FG_OLD = "ÄltestesFoto";
+	const FG_OLD = "Ã„ltestesFoto";
 	
     function getContent($value) {       
         global $specialchars;
