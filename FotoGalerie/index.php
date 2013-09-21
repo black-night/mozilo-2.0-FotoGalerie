@@ -214,7 +214,7 @@ class FotoGalerie extends Plugin {
     } //getSpezialGalerie
     
     function getHead() {   
-    	$head = '<style type="text/css"> @import "'.URL_BASE.PLUGIN_DIR_NAME.'/FotoGalerie/css/glisse.css"; </style>'
+    	$head = '<style type="text/css"> @import "'.URL_BASE.PLUGIN_DIR_NAME.'/FotoGalerie/plugin.css"; </style>'
     	        .'<script type="text/javascript" src="'.URL_BASE.PLUGIN_DIR_NAME.'/FotoGalerie/js/glisse.js"></script>'
     			;
     	return $head;
