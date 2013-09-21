@@ -221,12 +221,17 @@
             spinner(true);
             var img = $('<img/>',{src: pic}).appendTo(plugin.els['content']);
             plugin.els['content'].css({ backgroundImage: 'url("'+pic+'")'});
-
+            /* black-night - Image max height */
+            var xImg = new Image();
+            xImg.src = pic;
             img.load(function() {
                 img.remove();
                 spinner(false);
                 plugin.els['content'].css({visibility: 'visible', opacity: 1})
-                                     .css(getPrefix('transform')+'transform','scale(1)');
+                                     .css(getPrefix('transform')+'transform','scale(1)')
+                                     /* black-night - Image max height */
+                                     .css({'max-height': ''+xImg.height+'px'})
+                                     ;
             });
         };
 
@@ -277,7 +282,11 @@
 
                     var img = $('<img/>',{src: pictureUrl}).appendTo(plugin.els['content']);
                     plugin.els['content'].css({ backgroundImage: 'url("'+pictureUrl+'")'});
-                    
+                    /* black-night - Image max height */
+                    var xImg = new Image();
+                    xImg.src = pictureUrl;          
+                    /* black-night - Image max height */
+                    plugin.els['content'].css({'max-height': ''+xImg.height+'px'});
                     img.load(function() {
                         img.remove();
                         
