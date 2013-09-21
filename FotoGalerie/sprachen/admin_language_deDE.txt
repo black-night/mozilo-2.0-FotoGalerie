@@ -11,3 +11,5 @@ config_fotogallery_plugin_first             = Liefert das erste Foto der Galerie
 config_fotogallery_plugin_last              = Liefert das letzte Foto der Galerie
 config_fotogallery_plugin_new               = Liefert das neuste Foto der Galerie
 config_fotogallery_plugin_old               = Liefert das älteste Foto der Galerie
+config_fotogallery_plugin_random            = Liefert ein zufälliges Foto der Galerie
+config_fotogallery_showDownloadLink         = Soll für die Fotos ein Download Link angezeigt werden?

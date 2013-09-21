@@ -51,7 +51,7 @@ class FotoGalerie extends Plugin {
         $config['copyright'] = array(
         		"type" => "text",
         		"description" => $lang_gallery_admin->get("config_fotogallery_copyright")
-        );   
+        );
         $config['changeSpeed'] = array(
         		"type" => "text",
         		"description" => $lang_gallery_admin->get("config_fotogallery_changeSpeed"),
@@ -86,7 +86,11 @@ class FotoGalerie extends Plugin {
         $config['idwithgalleryname'] = array(
         		"type" => "checkbox",
         		"description" => $lang_gallery_admin->get("config_fotogallery_idwithgalleryname")
-        );        
+        );
+        $config['showDownloadLink'] = array(
+        		"type" => "checkbox",
+        		"description" => $lang_gallery_admin->get("config_fotogallery_showDownloadLink")
+        );
         return $config;            
     } // function getConfig
     
@@ -169,8 +173,9 @@ class FotoGalerie extends Plugin {
     					.", speed: ".$this->getInteger($this->settings->get("speed"))
     					.", effect:'".$this->getEffect()."'"
     							.", fullscreen: ".$this->getBooleanStr($this->settings->get("fullscreen"))
-    							.", copyright: '".$this->settings->get("copyright")
-    							."' }); }); </script>";
+    							.", copyright: '".$this->settings->get("copyright")."'"
+    							.", showDownloadLink: ".$this->getBooleanStr($this->settings->get("showDownloadLink"))
+    							." }); }); </script>";
     	$result .= "<br /><br/ >".$this->settings->get("copyright");
     	$result .= "</div>";
     	return $result;    	

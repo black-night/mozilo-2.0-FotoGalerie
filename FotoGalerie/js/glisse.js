@@ -23,6 +23,7 @@
                 fullscreen: false,
                 disablindRightClick: false,
                 copyright: '',
+                showDownloadLink: true,
                 parent: null // jQuery selector to find the container
             },
             // Private var
@@ -120,9 +121,11 @@
             plugin.els['controlPrev']   = $(document.createElement('span')).attr('class','glisse-prev')
                                             .append($(document.createElement('a')).html('&#60;').attr("href", "#"));
             /* blacknight - add - controllDownload/controllCopyright */
-            plugin.els['controlDownload'] = $(document.createElement('span')).attr('class','glisse-download')
-             								.append($(document.createElement('a')).html('Download').attr("href", "#").attr("class","glisse-download-link")
-             								.attr("download",""));
+            if (plugin.settings.showDownloadLink) {
+	            plugin.els['controlDownload'] = $(document.createElement('span')).attr('class','glisse-download')
+	             								.append($(document.createElement('a')).html('Download').attr("href", "#").attr("class","glisse-download-link")
+	             								.attr("download",""));
+            }
             plugin.els['controlCopyright'] = $(document.createElement('span')).attr('class','glisse-copyright').html(plugin.settings.copyright);
 
             // Add structure
