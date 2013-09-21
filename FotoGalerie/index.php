@@ -19,6 +19,7 @@ class FotoGalerie extends Plugin {
 	const FG_FIRST = "ErstesFoto";
 	const FG_NEW = "NeustesFoto";
 	const FG_OLD = "ÄltestesFoto";
+	const FG_RANDOM = "ZufälligesFoto";
 	
     function getContent($value) {       
         global $specialchars;
@@ -118,7 +119,8 @@ class FotoGalerie extends Plugin {
             	  '{FotoGalerie|'.self::FG_FIRST.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_first"),
             	  '{FotoGalerie|'.self::FG_LAST.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_last"),
             	  '{FotoGalerie|'.self::FG_NEW.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_new"),
-            	  '{FotoGalerie|'.self::FG_OLD.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_old")           		
+            	  '{FotoGalerie|'.self::FG_OLD.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_old"),
+            	  '{FotoGalerie|'.self::FG_RANDOM.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_random")
                  )
             );
             return $info;        
@@ -209,6 +211,9 @@ class FotoGalerie extends Plugin {
     			}
     		}
     		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" />";    		
+    	}elseif ($typ == self::FG_RANDOM) {
+    		$index = rand(0,count($picarray)-1);
+    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" />";
     	}
     	return $result;
     } //getSpezialGalerie
