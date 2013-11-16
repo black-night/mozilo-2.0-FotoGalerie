@@ -3,7 +3,7 @@
 /***************************************************************
 *
 * Plugin fuer moziloCMS, welches Fotos mit Hilfe von Glisse.js (http://glisse.victorcoulon.fr/) anzeigt.
-* by blacknight - Daniel Neef
+* by black-night - Daniel Neef
 * 
 ***************************************************************/
 
@@ -20,6 +20,9 @@ class FotoGalerie extends Plugin {
 	const FG_NEW = "NeustesFoto";
 	const FG_OLD = "ÄltestesFoto";
 	const FG_RANDOM = "ZufälligesFoto";
+	
+	private $lang_gallery_admin;
+	private $lang_gallery_cms;
 	
     function getContent($value) {       
         global $specialchars;
@@ -45,30 +48,29 @@ class FotoGalerie extends Plugin {
     * 
     ***************************************************************/
     function getConfig() {
-        global $lang_gallery_admin;
 
         $config = array();
         $config['copyright'] = array(
         		"type" => "text",
-        		"description" => $lang_gallery_admin->get("config_fotogallery_copyright")
+        		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_copyright")
         );
         $config['changeSpeed'] = array(
         		"type" => "text",
-        		"description" => $lang_gallery_admin->get("config_fotogallery_changeSpeed"),
+        		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_changeSpeed"),
         		"maxlength" => "4",
         		"regex" => "/^[1-9][0-9]?/",
-        		"regex_error" => $lang_gallery_admin->get("config_fotogallery_number_regex_error")        		
+        		"regex_error" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_number_regex_error")        		
         );
         $config['speed'] = array(
         		"type" => "text",
-        		"description" => $lang_gallery_admin->get("config_fotogallery_Speed"),
+        		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_Speed"),
         		"maxlength" => "4",
         		"regex" => "/^[1-9][0-9]?/",
-        		"regex_error" => $lang_gallery_admin->get("config_fotogallery_number_regex_error")
+        		"regex_error" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_number_regex_error")
         );  
         $config['effect'] = array(
         		"type" => "select",
-        		"description" => $lang_gallery_admin->get("config_fotogallery_effect"),
+        		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_effect"),
         		"descriptions" => array(
         				"bounce" => "bounce",
         				"fadeBig" => "fadeBig",
@@ -81,15 +83,15 @@ class FotoGalerie extends Plugin {
         );
         $config['fullscreen'] = array(
         		"type" => "checkbox",
-        		"description" => $lang_gallery_admin->get("config_fotogallery_fullscreen")        		
+        		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_fullscreen")        		
         );
         $config['idwithgalleryname'] = array(
         		"type" => "checkbox",
-        		"description" => $lang_gallery_admin->get("config_fotogallery_idwithgalleryname")
+        		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_idwithgalleryname")
         );
         $config['showDownloadLink'] = array(
         		"type" => "checkbox",
-        		"description" => $lang_gallery_admin->get("config_fotogallery_showDownloadLink")
+        		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_showDownloadLink")
         );
         return $config;            
     } // function getConfig
@@ -103,28 +105,27 @@ class FotoGalerie extends Plugin {
     ***************************************************************/
     function getInfo() {
         global $ADMIN_CONF;
-        global $lang_gallery_admin;
-        $dir = PLUGIN_DIR_REL."FotoGalerie/";
+        $dir = $this->PLUGIN_SELF_DIR;
         $language = $ADMIN_CONF->get("language");
-        $lang_gallery_admin = new Properties($dir."sprachen/admin_language_".$language.".txt",false);        
+        $this->lang_gallery_admin = new Language($dir."sprachen/admin_language_".$language.".txt");        
         $info = array(
             // Plugin-Name
-            "<b>".$lang_gallery_admin->get("config_fotogallery_plugin_name")."</b> \$Revision: 3 $",
+            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 3 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
-            $lang_gallery_admin->get("config_fotogallery_plugin_desc"),
+            $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_desc"),
             // Name des Autors
            "black-night",
             // Download-URL
             array("http://software.black-night.org","Software by black-night"),
             # Platzhalter => Kurzbeschreibung
-            array('{FotoGalerie|...}' => $lang_gallery_admin->get("config_fotogallery_plugin_name"),
-            	  '{FotoGalerie|'.self::FG_FIRST.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_first"),
-            	  '{FotoGalerie|'.self::FG_LAST.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_last"),
-            	  '{FotoGalerie|'.self::FG_NEW.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_new"),
-            	  '{FotoGalerie|'.self::FG_OLD.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_old"),
-            	  '{FotoGalerie|'.self::FG_RANDOM.',...}' => $lang_gallery_admin->get("config_fotogallery_plugin_random")
+            array('{FotoGalerie|...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name"),
+            	  '{FotoGalerie|'.self::FG_FIRST.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_first"),
+            	  '{FotoGalerie|'.self::FG_LAST.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_last"),
+            	  '{FotoGalerie|'.self::FG_NEW.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_new"),
+            	  '{FotoGalerie|'.self::FG_OLD.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_old"),
+            	  '{FotoGalerie|'.self::FG_RANDOM.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_random")
                  )
             );
             return $info;        
@@ -135,12 +136,11 @@ class FotoGalerie extends Plugin {
     * Interne Funktionen
     *
     ***************************************************************/
-    function getFullGalerie($galleryname) {
+    private function getFullGalerie($galleryname) {
     	global $CMS_CONF;
-    	global $lang_gallery_cms;
     	global $specialchars;
-    	$dir = PLUGIN_DIR_REL."FotoGalerie/";
-    	$lang_gallery_cms = new Language($dir."sprachen/cms_language_".$CMS_CONF->get("cmslanguage").".txt");    	
+    	$dir = $this->PLUGIN_SELF_DIR;
+    	$this->lang_gallery_cms = new Language($dir."sprachen/cms_language_".$CMS_CONF->get("cmslanguage").".txt");    	
     	$GALERIE_DIR = BASE_DIR.GALLERIES_DIR_NAME."/".$galleryname."/";
     	$GALERIE_DIR_SRC = str_replace("%","%25",URL_BASE.GALLERIES_DIR_NAME."/".$galleryname."/");
     	
@@ -169,8 +169,8 @@ class FotoGalerie extends Plugin {
     	$result .= "<script type=\"text/javascript\"> "
     			."$(\"a\").click(function(e) { if ($(this).hasClass('thumbnail-link')) { e.preventDefault(); } });"
     			."$(function () { $('.thumbnail').glisse({ "
-    					." changeSpeed: ".$this->getInteger($this->settings->get("changeSpeed"))
-    					.", speed: ".$this->getInteger($this->settings->get("speed"))
+    					." changeSpeed: ".$this->getChangeSpeed()
+    					.", speed: ".$this->getSpeed()
     					.", effect:'".$this->getEffect()."'"
     							.", fullscreen: ".$this->getBooleanStr($this->settings->get("fullscreen"))
     							.", copyright: '".$this->settings->get("copyright")."'"
@@ -181,7 +181,7 @@ class FotoGalerie extends Plugin {
     	return $result;    	
     } //getFullGalerie
     
-    function getSpezialGalerie($typ,$galleryname) {
+    private function getSpezialGalerie($typ,$galleryname) {
     	global $specialchars;
     	$GALERIE_DIR = BASE_DIR.GALLERIES_DIR_NAME."/".$galleryname."/";
     	$GALERIE_DIR_SRC = str_replace("%","%25",URL_BASE.GALLERIES_DIR_NAME."/".$galleryname."/");
@@ -223,14 +223,14 @@ class FotoGalerie extends Plugin {
     	return $result;
     } //getSpezialGalerie
     
-    function getHead() {   
+    private function getHead() {   
     	$head = '<style type="text/css"> @import "'.URL_BASE.PLUGIN_DIR_NAME.'/FotoGalerie/plugin.css"; </style>'
     	        .'<script type="text/javascript" src="'.URL_BASE.PLUGIN_DIR_NAME.'/FotoGalerie/js/glisse.js"></script>'
     			;
     	return $head;
     } //function getHead
     
-    function getCurrentDescription($picname,$picarray,$alldescriptions) {
+    private function getCurrentDescription($picname,$picarray,$alldescriptions) {
     	global $specialchars;
     
     	if(!$alldescriptions)
@@ -247,7 +247,7 @@ class FotoGalerie extends Plugin {
     	}
     }  //function getCurrentDescription
 
-    function getInteger($value) {
+    private function getInteger($value) {
     	if (is_numeric($value) and ($value > 0)) {
     		return $value;
     	} else {
@@ -255,7 +255,7 @@ class FotoGalerie extends Plugin {
     	}
     } //function getInteger
     
-    function getEffect() {
+    private function getEffect() {
     	$effect = $this->settings->get("effect");
     	if (strlen($effect) > 0) {
     		return $effect;
@@ -264,11 +264,11 @@ class FotoGalerie extends Plugin {
     	}
     } //function getEffect
     
-    function getBoolean($value) {
+    private function getBoolean($value) {
     	return (strtoupper($value)=="TRUE");
     } //function getBoolean
     
-    function getBooleanStr($value) {
+    private function getBooleanStr($value) {
     	if ($this->getBoolean($value)) {
     		return "true";
     	} else {
@@ -276,13 +276,29 @@ class FotoGalerie extends Plugin {
     	}
     } //function getBooleanStr
     
-    function getIDName($galleryName) {
+    private function getIDName($galleryName) {
     	if ($this->getBoolean($this->settings->get("idwithgalleryname"))) {
     		return "fotogalerie".$galleryName;
     	} else {
     		return "fotogalerie";
     	}
-    } //function getBooleanStr    
+    } //function getBooleanStr
+
+    private function getChangeSpeed() {
+        if ($this->settings->get("changeSpeed")) {
+    		return $this->getInteger($this->settings->get("changeSpeed"));
+    	} else {
+    		return 1000;
+    	}
+    }  //function getChangeSpeed
+    
+    private function getSpeed() {
+        if ($this->settings->get("Speed")) {
+            return $this->getInteger($this->settings->get("Speed"));
+        } else {
+            return 300;
+        }
+    }  //function getChangeSpeed    
 } // class FotoGalerie
 
 ?>
