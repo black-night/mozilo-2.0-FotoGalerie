@@ -13,3 +13,4 @@ config_fotogallery_plugin_new               = Liefert das neuste Foto der Galeri
 config_fotogallery_plugin_old               = Liefert das älteste Foto der Galerie
 config_fotogallery_plugin_random            = Liefert ein zufälliges Foto der Galerie
 config_fotogallery_showDownloadLink         = Soll für die Fotos ein Download Link angezeigt werden?
+config_fotogallery_showMaxLink              = Soll für die Fotos ein Maximieren Link angezeigt werden?

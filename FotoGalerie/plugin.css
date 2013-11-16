@@ -1,3 +1,4 @@
+@import "./css/font-awesome.min.css";
 html{height:100%}
 
 /* Glisse: Hide elements by default */
@@ -64,7 +65,7 @@ html{height:100%}
 #glisse-controls {}
     
     /* Prev/Next button */
-    .glisse-next a, .glisse-prev a{
+    .glisse-next a, .glisse-prev a, .glisse-next i, .glisse-prev i{
         -webkit-transition:all 100ms ease;
         -moz-transition:all 100ms ease;
         -o-transition:all 100ms ease;
@@ -74,7 +75,7 @@ html{height:100%}
         -moz-user-select:none;
         user-select:none;
     }
-    #glisse-controls .ended a {opacity:.3;cursor:default;} /* disabled effect */
+    #glisse-controls .ended a, .ended i {opacity:.3;cursor:default;} /* disabled effect */
 
 /* Glisse: Keyframes */
 @-webkit-keyframes shake {
@@ -129,7 +130,7 @@ html{height:100%}
   -o-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 3px rgba(0, 0, 0, 0.7);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 3px rgba(0, 0, 0, 0.7); }
 
-.glisse-download a {
+.glisse-download a, .glisse-showmax a {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -137,9 +138,15 @@ html{height:100%}
   top: 30px;
   bottom: 0;
   left: auto;
-  right: 60px;
+  right: 45px;
   text-align: right;
-  line-height: 20px;	
+  line-height: 20px;
+  font-size: 20px;
+  color: #EAEAEA;
+}
+.glisse-showmax a {
+  top: 5px;
+  bottom: 23px;
 }
 .glisse-copyright {
   text-overflow: ellipsis;
@@ -149,37 +156,40 @@ html{height:100%}
   top: 30px;
   bottom: 0;
   left: 60px;
-  right: 125px;
-  text-align: left;
+  right: 65px;
+  text-align: center;
   line-height: 20px;	
   font-size: 9px;    
 }
 
-.glisse-next a, .glisse-prev a {
+.glisse-next a, .glisse-next i, .glisse-prev a, .glisse-prev i {
   position: absolute;
   display: block;
   left: 0;
-  height: 39px;
+  height: 59px;
   width: 39px;
-  font-family: 'WebSymbolsRegular';
-  line-height: 40px;
-  color: white;
+  line-height: 50px;
+  color: #EAEAEA;
   font-size: 36px;
   text-align: center;
   text-decoration: none;
   text-shadow: 0 -1px 0 black; }
 
-.glisse-next a:active, .glisse-prev a:active {
+.glisse-next a:hover, .glisse-prev a:hover, .glisse-next i:hover, .glisse-prev i:hover, .glisse-showmax i:hover, .glisse-download i:hover {
+  color: white;
+}
+
+.glisse-next a:active, .glisse-prev a:active, .glisse-next i:active, .glisse-prev i:active, .glisse-showmax i:active, .glisse-download i:active {
   text-shadow: 0 0 30px white, 0 0 10px white; }
 
-.glisse-prev a {
+.glisse-prev a, .glisse-prev i {
   border-right: 1px solid #2d2f35;
   -moz-box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.15);
   -webkit-box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.15);
   -o-box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.15);
   box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.15); }
 
-.glisse-next a {
+.glisse-next a, .glisse-next i {
   left: auto;
   right: 0;
   border-left: 1px solid #2d2f35;
@@ -196,6 +206,6 @@ html{height:100%}
   top: -5px;
   bottom: 0;
   left: 40px;
-  right: 40px;
+  right: 65px;
   text-align: center;
   line-height: 40px; }

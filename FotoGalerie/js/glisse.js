@@ -24,6 +24,11 @@
                 disablindRightClick: false,
                 copyright: '',
                 showDownloadLink: true,
+                showMaxLink: true,
+                strDownload: '',
+                strMax: '',
+                strNext: '',
+                strPrev: '',
                 parent: null // jQuery selector to find the container
             },
             // Private var
@@ -58,6 +63,7 @@
                 setTitle();
                 /* blacknight - add - setDownload */
                 setDownload();
+                setShowMax();
                 preloadImgs();
 
                 // Bind Keyboard events
@@ -115,16 +121,30 @@
             plugin.els['content']       = $(document.createElement('div')).attr('id','glisse-overlay-content').css(cssProp, cssVal)
                                             .css(getPrefix('transform')+'transform', 'scale(0)');
             plugin.els['controls']      = $(document.createElement('div')).attr('id','glisse-controls').css(cssProp, cssVal);
+            //plugin.els['controlNext']   = $(document.createElement('span')).attr('class','glisse-next')
+            //                                .append( $(document.createElement('a')).html('&#62;').attr("href", "#"));
             plugin.els['controlNext']   = $(document.createElement('span')).attr('class','glisse-next')
-                                            .append( $(document.createElement('a')).html('&#62;').attr("href", "#"));
+            								.append( $(document.createElement('a')).attr("href", "#")  
+            										.attr("title",plugin.settings.strNext)
+            										.append( $(document.createElement('i')).attr("class", "fa fa-chevron-right")));
             plugin.els['controlLegend'] = $(document.createElement('span')).attr('class','glisse-legend');
             plugin.els['controlPrev']   = $(document.createElement('span')).attr('class','glisse-prev')
-                                            .append($(document.createElement('a')).html('&#60;').attr("href", "#"));
+                                            .append($(document.createElement('a')).attr("href", "#")
+                                            		.attr("title",plugin.settings.strPrev)
+                                            		.append( $(document.createElement('i')).attr("class", "fa fa-chevron-left")));
             /* blacknight - add - controllDownload/controllCopyright */
             if (plugin.settings.showDownloadLink) {
 	            plugin.els['controlDownload'] = $(document.createElement('span')).attr('class','glisse-download')
-	             								.append($(document.createElement('a')).html('Download').attr("href", "#").attr("class","glisse-download-link")
-	             								.attr("download",""));
+	             								.append($(document.createElement('a')).attr("href", "#").attr("class","glisse-download-link")
+	             										.attr("download","")
+	             										.attr("title",plugin.settings.strDownload)
+	             										.append( $(document.createElement('i')).attr("class", "fa fa-download ")));
+            }
+            if (plugin.settings.showMaxLink) {
+	            plugin.els['controlShowMax'] = $(document.createElement('span')).attr('class','glisse-showmax')
+				.append($(document.createElement('a')).attr("href", "#").attr("class","glisse-showmax-link")
+						.attr("title",plugin.settings.strMax)
+						.append( $(document.createElement('i')).attr("class", "fa fa-arrows-alt ")));	            
             }
             plugin.els['controlCopyright'] = $(document.createElement('span')).attr('class','glisse-copyright').html(plugin.settings.copyright);
 
@@ -136,8 +156,9 @@
                     plugin.els['controlPrev']);
             /* blacknight - add - controllDownload/controllCopyright */            
             plugin.els['controls'].append(
-            		plugin.els['controlCopyright'],
-                    plugin.els['controlDownload']);            
+            		plugin.els['controlCopyright']); 
+            if (plugin.settings.showMaxLink) plugin.els['controls'].append(plugin.els['controlShowMax']);
+            if (plugin.settings.showDownloadLink) plugin.els['controls'].append(plugin.els['controlDownload']);
             plugin.els['wrapper'].append(
                     plugin.els['overlay'],
                     plugin.els['close'],
@@ -276,6 +297,7 @@
                 setTitle();
                 /* blacknight - add - setDownload */
                 setDownload();
+                setShowMax();
 
                 setTimeout(function() {
                     if(plugin.settings.mobile){
@@ -543,6 +565,10 @@
         	var $currentEl = $('a[class="glisse-download-link"]');
         	$currentEl.attr("href",pictureUrl);
         };
+        var setShowMax = function setShowMax() {
+        	var $currentEl = $('a[class="glisse-showmax-link"]');
+        	$currentEl.attr("href",pictureUrl).attr("target","_blank");
+        };        
 
         // Spinner =========================================
         var spinner = function spinner(action) {
