@@ -93,6 +93,10 @@ class FotoGalerie extends Plugin {
         		"type" => "checkbox",
         		"description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_showDownloadLink")
         );
+        $config['showMaxLink'] = array(
+                "type" => "checkbox",
+                "description" => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_showMaxLink")
+        );        
         return $config;            
     } // function getConfig
     
@@ -110,7 +114,7 @@ class FotoGalerie extends Plugin {
         $this->lang_gallery_admin = new Language($dir."sprachen/admin_language_".$language.".txt");        
         $info = array(
             // Plugin-Name
-            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 3 $",
+            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 4 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
@@ -175,6 +179,11 @@ class FotoGalerie extends Plugin {
     							.", fullscreen: ".$this->getBooleanStr($this->settings->get("fullscreen"))
     							.", copyright: '".$this->settings->get("copyright")."'"
     							.", showDownloadLink: ".$this->getBooleanStr($this->settings->get("showDownloadLink"))
+    							.", showMaxLink: ".$this->getBooleanStr($this->settings->get("showMaxLink"))
+    							.", strDownload: '".$this->lang_gallery_cms->getLanguageValue("download")."'"
+    							.", strMax: '".$this->lang_gallery_cms->getLanguageValue("showmax")."'"
+    							.", strNext: '".$this->lang_gallery_cms->getLanguageValue("next")."'"
+                                .", strPrev: '".$this->lang_gallery_cms->getLanguageValue("prev")."'"    							        
     							." }); }); </script>";
     	$result .= "<br /><br/ >".$this->settings->get("copyright");
     	$result .= "</div>";

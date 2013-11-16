@@ -11,4 +11,5 @@ Bei aktiviertem JavaScript wird eine Slideshow (auf Grundlage von Glisse.js (htt
 * Lizenz: 
       * LGPL 3.0 (http://www.gnu.org/licenses/lgpl) (Deutsch: http://www.gnu.de/documents/lgpl-3.0.de.html)
       * Bilder dieses Projekt sind lizensiert als Inhalt der Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 3.0 Unported-Lizenz. Um eine Kopie der Lizenz zu sehen, besuchen Sie http://creativecommons.org/licenses/by-sa/3.0/.
-      * enthält Glisse.js (http://glisse.victorcoulon.fr/ Licence Mit) 
+      * enthält Glisse.js (http://glisse.victorcoulon.fr/ Licence MIT) 
+      * enthält Font Awesome (http://fortawesome.github.io/Font-Awesome/ Licence SIL OFL 1.1 and MIT)
