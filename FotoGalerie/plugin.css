@@ -155,7 +155,7 @@ html{height:100%}
   position: absolute;   
   top: 30px;
   bottom: 0;
-  left: 60px;
+  left: 40px;
   right: 65px;
   text-align: center;
   line-height: 20px;	
@@ -166,7 +166,7 @@ html{height:100%}
   position: absolute;
   display: block;
   left: 0;
-  height: 59px;
+  height: 100%;
   width: 39px;
   line-height: 50px;
   color: #EAEAEA;
@@ -203,9 +203,9 @@ html{height:100%}
   overflow: hidden;
   white-space: nowrap;
   position: absolute;
-  top: -5px;
+  top: 3px;
   bottom: 0;
   left: 40px;
   right: 65px;
   text-align: center;
-  line-height: 40px; }
+  line-height: 25px; }

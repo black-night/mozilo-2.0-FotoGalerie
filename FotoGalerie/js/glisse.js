@@ -38,6 +38,7 @@
             mobile = {},
             touch = {},
             cache = [],
+            controlsDefaultHeight = -1,
             getFullUrl = function ($el) {
                 return $el.attr(plugin.settings.dataName) || $el.attr('src');
             };
@@ -50,8 +51,8 @@
 
             // Set vars
             group = $element.attr('rel') || null;
-            plugin.settings.mobile = !!navigator.userAgent.match(/iPhone|iPod|iPad|Android/i);
-
+            plugin.settings.mobile = !!navigator.userAgent.match(/iPhone|iPod|iPad|Android/i);            
+            
             // Set events
             $element.on('click', function () {
                 pictureUrl = getFullUrl($element);
@@ -90,6 +91,7 @@
                     document.ontouchmove = document.ontouchstart = document.ontouchend = touchHandler;
                 }
             });
+           
         };
 
         var preloadImgs = function preloadImgs(){
@@ -181,7 +183,17 @@
                 if($(this).parent().hasClass('glisse-prev')) {
                 	e.preventDefault();
                 	changePicture('prev');
-                }                
+                }       
+            });
+            plugin.els['controls'].delegate('span','click', function(e){
+                if($(this).hasClass('glisse-legend')) {
+                    /*var title      = $('img['+plugin.settings.dataName+'="'+pictureUrl+'"]').attr('title');
+                    $title = (title) ? title : '';                    
+                    alert($title);*/ 
+                	toggleTitleMaxMin();
+                }else if(controlsDefaultHeight != plugin.els['controls'].css('height')) {
+                	toggleTitleMaxMin();
+                }
             });
 
             plugin.els['overlay'].on('click', function() { closeLightbox(); });
@@ -270,6 +282,9 @@
             }
 
             if(change && isChange === false){
+                if(controlsDefaultHeight != plugin.els['controls'].css('height')) {
+                	toggleTitleMaxMin();
+                }
                 isChange = true;
                 var $next = (direction === 'next') ? $('img[rel='+group+']').eq(currentId+1) : $('img[rel='+group+']').eq(currentId-1);
                 if(plugin.settings.mobile){
@@ -569,6 +584,22 @@
         	var $currentEl = $('a[class="glisse-showmax-link"]');
         	$currentEl.attr("href",pictureUrl).attr("target","_blank");
         };        
+        var toggleTitleMaxMin = function toggleTitleMaxMin() {
+           	if((controlsDefaultHeight == -1) || (controlsDefaultHeight == plugin.els['controls'].css('height'))) {
+        		controlsDefaultHeight = plugin.els['controls'].css('height');
+        		plugin.els['controls'].css({'height':'100%'});
+        		plugin.els['controlLegend'].css({'white-space':'normal','right':'40px','overflow':'auto'});  
+        		plugin.els['controlCopyright'].css({'display':'none'});
+        		plugin.els['controlDownload'].css({'display':'none'});
+        		plugin.els['controlShowMax'].css({'display':'none'});
+        	}else{
+        		plugin.els['controls'].css({'height':controlsDefaultHeight});
+        		plugin.els['controlLegend'].css({'white-space':'nowrap','right':'65px','overflow':'hidden'});
+        		plugin.els['controlCopyright'].css({'display':'inline'});
+        		plugin.els['controlDownload'].css({'display':'inline'});
+        		plugin.els['controlShowMax'].css({'display':'inline'});
+        	}        	
+        };
 
         // Spinner =========================================
         var spinner = function spinner(action) {
