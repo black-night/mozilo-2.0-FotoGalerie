@@ -231,7 +231,7 @@ class FotoGalerie extends Plugin {
         if (!$previewFile) 
             return 'Datei ('.$preview.') existiert nicht!';
         $file = $CatPage->split_CatPage_fromSyntax($img,true);
-        $imgFile = $CatPage->get_HrefFile($file[0],$file[1]);
+        $imgFile = $CatPage->get_srcFile($file[0],$file[1]);
         if (!$previewFile)
             return 'Datei ('.$img.') existiert nicht!';
         global $syntax;
