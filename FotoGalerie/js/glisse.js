@@ -187,9 +187,6 @@
             });
             plugin.els['controls'].delegate('span','click', function(e){
                 if($(this).hasClass('glisse-legend')) {
-                    /*var title      = $('img['+plugin.settings.dataName+'="'+pictureUrl+'"]').attr('title');
-                    $title = (title) ? title : '';                    
-                    alert($title);*/ 
                 	toggleTitleMaxMin();
                 }else if(controlsDefaultHeight != plugin.els['controls'].css('height')) {
                 	toggleTitleMaxMin();
@@ -587,6 +584,7 @@
         var toggleTitleMaxMin = function toggleTitleMaxMin() {
            	if((controlsDefaultHeight == -1) || (controlsDefaultHeight == plugin.els['controls'].css('height'))) {
         		controlsDefaultHeight = plugin.els['controls'].css('height');
+        		plugin.els['controls'].css({'transition':'height 0.32s ease-in-out 0s'});
         		plugin.els['controls'].css({'height':'100%'});
         		plugin.els['controlLegend'].css({'white-space':'normal','right':'40px','overflow':'auto'});  
         		plugin.els['controlCopyright'].css({'display':'none'});
