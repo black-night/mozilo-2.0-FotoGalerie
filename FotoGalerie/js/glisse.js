@@ -550,16 +550,15 @@
         // === Controls actions  =================
 
         var setChangeStatus = function setChangeStatus() {
-            var $currentEl = $('img['+plugin.settings.dataName+'="'+pictureUrl+'"]'),
-                parent = plugin.settings.parent?
-                    $currentEl.closest(plugin.settings.parent):
-                    $currentEl.parent();
-            if(!parent.next().find('img[rel='+group+']').length) {
+            var $currentEl = $('img['+plugin.settings.dataName+'="'+pictureUrl+'"][rel='+group+']'),
+	            currentId  = $('img[rel='+group+']').index($currentEl),
+	            totGroup   = $('img[rel='+group+']').length;
+	        if (currentId === (totGroup-1)) {
                 plugin.els['controls'].find('.glisse-next').addClass('ended');
             } else {
                 plugin.els['controls'].find('.glisse-next').removeClass('ended');
             }
-            if(!parent.prev().find('img[rel='+group+']').length) {
+            if (currentId === 0) {
                 plugin.els['controls'].find('.glisse-prev').addClass('ended');
             } else {
                 plugin.els['controls'].find('.glisse-prev').removeClass('ended');

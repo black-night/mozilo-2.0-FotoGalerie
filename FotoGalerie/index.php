@@ -20,6 +20,7 @@ class FotoGalerie extends Plugin {
 	const FG_NEW = "NeustesFoto";
 	const FG_OLD = "ÄltestesFoto";
 	const FG_RANDOM = "ZufälligesFoto";
+	const FG_SINGLE = "EinzelFoto";
 	
 	private $lang_gallery_admin;
 	private $lang_gallery_cms;
@@ -32,8 +33,11 @@ class FotoGalerie extends Plugin {
         	$gal_request = $specialchars->replacespecialchars($specialchars->getHtmlEntityDecode($values[0]),false);
         	$result =  $this->getFullGalerie($gal_request);
         }else if (count($values) == 2) {
-        	$gal_request = $specialchars->replacespecialchars($specialchars->getHtmlEntityDecode($values[1]),false);
 			$result = $this->getSpezialGalerie($values[0],$values[1]);
+        }else if (count($values) == 3) {
+            $result = $this->getSingleFoto($values[1],$values[2],'');
+        }else if (count($values) == 4) {
+            $result = $this->getSingleFoto($values[1],$values[2],$values[3]);
         }
         
         return $result;
@@ -114,7 +118,7 @@ class FotoGalerie extends Plugin {
         $this->lang_gallery_admin = new Language($dir."sprachen/admin_language_".$language.".txt");        
         $info = array(
             // Plugin-Name
-            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 4 $",
+            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: beta 5 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
@@ -129,7 +133,8 @@ class FotoGalerie extends Plugin {
             	  '{FotoGalerie|'.self::FG_LAST.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_last"),
             	  '{FotoGalerie|'.self::FG_NEW.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_new"),
             	  '{FotoGalerie|'.self::FG_OLD.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_old"),
-            	  '{FotoGalerie|'.self::FG_RANDOM.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_random")
+            	  '{FotoGalerie|'.self::FG_RANDOM.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_random"),
+                  '{FotoGalerie|'.self::FG_SINGLE.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_single")
                  )
             );
             return $info;        
@@ -170,21 +175,6 @@ class FotoGalerie extends Plugin {
     														." />"
     																."</a>";
     	}
-    	$result .= "<script type=\"text/javascript\"> "
-    			."$(\"a\").click(function(e) { if ($(this).hasClass('thumbnail-link')) { e.preventDefault(); } });"
-    			."$(function () { $('.thumbnail').glisse({ "
-    					." changeSpeed: ".$this->getChangeSpeed()
-    					.", speed: ".$this->getSpeed()
-    					.", effect:'".$this->getEffect()."'"
-    							.", fullscreen: ".$this->getBooleanStr($this->settings->get("fullscreen"))
-    							.", copyright: '".$this->settings->get("copyright")."'"
-    							.", showDownloadLink: ".$this->getBooleanStr($this->settings->get("showDownloadLink"))
-    							.", showMaxLink: ".$this->getBooleanStr($this->settings->get("showMaxLink"))
-    							.", strDownload: '".$this->lang_gallery_cms->getLanguageValue("download")."'"
-    							.", strMax: '".$this->lang_gallery_cms->getLanguageValue("showmax")."'"
-    							.", strNext: '".$this->lang_gallery_cms->getLanguageValue("next")."'"
-                                .", strPrev: '".$this->lang_gallery_cms->getLanguageValue("prev")."'"    							        
-    							." }); }); </script>";
     	$result .= "<br /><br/ >".$this->settings->get("copyright");
     	$result .= "</div>";
     	return $result;    	
@@ -232,9 +222,52 @@ class FotoGalerie extends Plugin {
     	return $result;
     } //getSpezialGalerie
     
+    private function getSingleFoto($preview,$img,$txt) {
+        global $CMS_CONF;
+        $this->lang_gallery_cms = new Language($this->PLUGIN_SELF_DIR."sprachen/cms_language_".$CMS_CONF->get("cmslanguage").".txt");        
+        global $CatPage;
+        $file = $CatPage->split_CatPage_fromSyntax($preview,true);        
+        $previewFile = $CatPage->get_srcFile($file[0],$file[1]);
+        if (!$previewFile) 
+            return 'Datei ('.$preview.') existiert nicht!';
+        $file = $CatPage->split_CatPage_fromSyntax($img,true);
+        $imgFile = $CatPage->get_HrefFile($file[0],$file[1]);
+        if (!$previewFile)
+            return 'Datei ('.$img.') existiert nicht!';
+        global $syntax;
+        $syntax->insert_jquery_in_head('jquery');
+        $syntax->insert_in_head($this->getHead());
+        $result = "";
+        $result .=  "<a href=\"".$imgFile."\" class=\"thumbnail-link\">"
+            				."<img src=\"".$previewFile."\" "
+            				        ."alt=\"".$txt."\" class=\"thumbnail\" "
+            			            ."data-glisse-big=\"".$imgFile."\" "
+            			            ."title=\"".$txt."\" "
+            			            ."rel=\"single1\" "
+            			    ." />"
+            		."</a>";
+        return $result;
+                
+    }//getSingleFoto
+    
     private function getHead() {   
     	$head = '<style type="text/css"> @import "'.URL_BASE.PLUGIN_DIR_NAME.'/FotoGalerie/plugin.css"; </style>'
     	        .'<script type="text/javascript" src="'.URL_BASE.PLUGIN_DIR_NAME.'/FotoGalerie/js/glisse.js"></script>'
+    	        ."<script type=\"text/javascript\"> $(document).ready(function(){"
+                    ."$(\"a\").click(function(e) { if ($(this).hasClass('thumbnail-link')) { e.preventDefault(); } });"
+                            ."$(function () { $('.thumbnail').glisse({ "
+                                    ." changeSpeed: ".$this->getChangeSpeed()
+                                    .", speed: ".$this->getSpeed()
+                                    .", effect:'".$this->getEffect()."'"
+                                    .", fullscreen: ".$this->getBooleanStr($this->settings->get("fullscreen"))
+                                    .", copyright: '".$this->settings->get("copyright")."'"
+                                    .", showDownloadLink: ".$this->getBooleanStr($this->settings->get("showDownloadLink"))
+                                    .", showMaxLink: ".$this->getBooleanStr($this->settings->get("showMaxLink"))
+                                    .", strDownload: '".$this->lang_gallery_cms->getLanguageValue("download")."'"
+                                    .", strMax: '".$this->lang_gallery_cms->getLanguageValue("showmax")."'"
+                                    .", strNext: '".$this->lang_gallery_cms->getLanguageValue("next")."'"
+                                    .", strPrev: '".$this->lang_gallery_cms->getLanguageValue("prev")."'"
+                ." }); }); });</script>"
     			;
     	return $head;
     } //function getHead
