@@ -188,7 +188,7 @@
             plugin.els['controls'].delegate('span','click', function(e){
                 if($(this).hasClass('glisse-legend')) {
                 	toggleTitleMaxMin();
-                }else if(controlsDefaultHeight != plugin.els['controls'].css('height')) {
+                }else if((controlsDefaultHeight != plugin.els['controls'].css('height')) && (controlsDefaultHeight !== -1)) {
                 	toggleTitleMaxMin();
                 }
             });
@@ -279,7 +279,7 @@
             }
 
             if(change && isChange === false){
-                if(controlsDefaultHeight != plugin.els['controls'].css('height')) {
+                if((controlsDefaultHeight != plugin.els['controls'].css('height')) && (controlsDefaultHeight !== -1)) {
                 	toggleTitleMaxMin();
                 }
                 isChange = true;
