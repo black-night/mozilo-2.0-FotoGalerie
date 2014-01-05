@@ -21,6 +21,7 @@ class FotoGalerie extends Plugin {
 	const FG_OLD = "ÄltestesFoto";
 	const FG_RANDOM = "ZufälligesFoto";
 	const FG_SINGLE = "EinzelFoto";
+	const FG_COUNT = "AnzahlFotos";
 	
 	private $lang_gallery_admin;
 	private $lang_gallery_cms;
@@ -134,7 +135,8 @@ class FotoGalerie extends Plugin {
             	  '{FotoGalerie|'.self::FG_NEW.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_new"),
             	  '{FotoGalerie|'.self::FG_OLD.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_old"),
             	  '{FotoGalerie|'.self::FG_RANDOM.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_random"),
-                  '{FotoGalerie|'.self::FG_SINGLE.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_single")
+                  '{FotoGalerie|'.self::FG_SINGLE.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_single"),
+                  '{FotoGalerie|'.self::FG_COUNT.',...}' => $this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_count")
                  )
             );
             return $info;        
@@ -218,6 +220,8 @@ class FotoGalerie extends Plugin {
     	}elseif ($typ == self::FG_RANDOM) {
     		$index = rand(0,count($picarray)-1);
     		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" />";
+    	}elseif ($typ == self::FG_COUNT) {
+    	    $result = count($picarray);
     	}
     	return $result;
     } //getSpezialGalerie
