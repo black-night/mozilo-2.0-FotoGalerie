@@ -252,18 +252,14 @@
 
         var addImage = function addImage(pic) {
             spinner(true);
-            var img = $('<img/>',{src: pic}).appendTo(plugin.els['content']);
-            plugin.els['content'].css({ backgroundImage: 'url("'+pic+'")'});
-            /* black-night - Image max height */
-            var xImg = new Image();
-            xImg.src = pic;
-            img.load(function() {
+            var img = $('<img/>',{src: pic}).appendTo(plugin.els['content']).load(function() {
                 img.remove();
                 spinner(false);
+                plugin.els['content'].css({ backgroundImage: 'url("'+pic+'")'});
                 plugin.els['content'].css({visibility: 'visible', opacity: 1})
                                      .css(getPrefix('transform')+'transform','scale(1)')
                                      /* black-night - Image max height */
-                                     .css({'max-height': ''+xImg.height+'px'})
+                                     .css({'max-height': ''+this.naturalHeight+'px'})
                                      ;
             });
         };
@@ -317,14 +313,7 @@
                             .css('display','none');
                     }
 
-                    var img = $('<img/>',{src: pictureUrl}).appendTo(plugin.els['content']);
-                    plugin.els['content'].css({ backgroundImage: 'url("'+pictureUrl+'")'});
-                    /* black-night - Image max height */
-                    var xImg = new Image();
-                    xImg.src = pictureUrl;          
-                    /* black-night - Image max height */
-                    plugin.els['content'].css({'max-height': ''+xImg.height+'px'});
-                    img.load(function() {
+                    var img = $('<img/>',{src: pictureUrl}).appendTo(plugin.els['content']).load(function() {
                         img.remove();
                         
                         if($.inArray(pictureUrl, cache) === -1)
@@ -333,6 +322,9 @@
                         if(plugin.settings.mobile){
                             plugin.els['content'].css('display','block');
                         }
+                        /* black-night - Image max height */
+                        plugin.els['content'].css({'max-height': ''+this.naturalHeight+'px'});                        
+                        plugin.els['content'].css({ backgroundImage: 'url("'+pictureUrl+'")'});                        
                         plugin.els['content'].removeClass('glisse-transitionOut-'+direction)
                                                     .addClass('glisse-transitionIn-'+direction);
                         setTimeout(function(){
