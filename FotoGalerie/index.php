@@ -119,7 +119,7 @@ class FotoGalerie extends Plugin {
         $this->lang_gallery_admin = new Language($dir."sprachen/admin_language_".$language.".txt");        
         $info = array(
             // Plugin-Name
-            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 5 $",
+            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 6 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
