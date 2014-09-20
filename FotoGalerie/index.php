@@ -119,7 +119,7 @@ class FotoGalerie extends Plugin {
         $this->lang_gallery_admin = new Language($dir."sprachen/admin_language_".$language.".txt");        
         $info = array(
             // Plugin-Name
-            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 6 $",
+            "<b>".$this->lang_gallery_admin->getLanguageValue("config_fotogallery_plugin_name")."</b> \$Revision: 7 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
@@ -177,7 +177,7 @@ class FotoGalerie extends Plugin {
     														." />"
     																."</a>";
     	}
-    	$result .= "<br /><br/ >".$this->settings->get("copyright");
+    	$result .= "<br /><br />".$this->settings->get("copyright");
     	$result .= "</div>";
     	return $result;    	
     } //getFullGalerie
@@ -189,10 +189,10 @@ class FotoGalerie extends Plugin {
     	$picarray = getDirAsArray($GALERIE_DIR,"img");
     	if ($typ == self::FG_LAST) {
     		//Letztes Foto der Galerie laden
-    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[count($picarray)-1],true)."\" />";
+    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[count($picarray)-1],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[count($picarray)-1],true,true)."\" />";
     	}elseif ($typ == self::FG_FIRST) {
     		//Erste Foto der Galerie laden
-    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[0],true)."\" />";    		
+    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[0],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[0],true,true)."\" />";
     	}elseif ($typ == self::FG_NEW) {
     		//Neustes Foto der Galerie laden
     		$chdate = 0;
@@ -204,7 +204,7 @@ class FotoGalerie extends Plugin {
     				$index = $i;
     			}
     		}
-    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" />";
+    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$index],true,true)."\" />";
     	}elseif ($typ == self::FG_OLD) {
     		//Aeltestes Foto der Galerie laden
     		$chdate = time();
@@ -216,10 +216,10 @@ class FotoGalerie extends Plugin {
     				$index = $i;
     			}
     		}
-    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" />";    		
+    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$index],true,true)."\" />";    		
     	}elseif ($typ == self::FG_RANDOM) {
     		$index = rand(0,count($picarray)-1);
-    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" />";
+    		$result = "<img src=\"".$GALERIE_DIR_SRC.PREVIEW_DIR_NAME."/".$specialchars->replaceSpecialChars($picarray[$index],true)."\" alt=\"".$specialchars->rebuildSpecialChars($picarray[$index],true,true)."\" />";
     	}elseif ($typ == self::FG_COUNT) {
     	    $result = count($picarray);
     	}
