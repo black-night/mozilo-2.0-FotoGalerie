@@ -165,6 +165,7 @@ class FotoGalerie extends Plugin {
     	
     	// Galerieverzeichnis einlesen
     	$picarray = getDirAsArray($GALERIE_DIR,"img");
+    	$group = "group-".md5($galleryname); // md5 verhindert hier Probleme mit Sonderzeichen
     	$i = 0;
     	$result = "<div id=\"".$this->getIDName($galleryname)."\">";
     	for ($i=0; $i<count($picarray); $i++) {
@@ -173,7 +174,7 @@ class FotoGalerie extends Plugin {
     						."alt=\"".$specialchars->rebuildSpecialChars($picarray[$i],true,true)."\" class=\"thumbnail\" "
     								."data-glisse-big=\"".$GALERIE_DIR_SRC.$specialchars->replaceSpecialChars($picarray[$i],true)."\" "
     										."title=\"".$this->getCurrentDescription($picarray[$i],$picarray,$alldescriptions)."\" "
-    												."rel=\"group1\" "
+    												."rel=\"".$group."\" "
     														." />"
     																."</a>";
     	}
