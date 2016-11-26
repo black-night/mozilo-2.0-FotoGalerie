@@ -5,7 +5,7 @@ config_fotogallery_Speed                    = Zeitspannen beim Starten/Beenden d
 config_fotogallery_effect                   = Überblendungseffekt (Standard bounce).
 config_fotogallery_fullscreen               = Bilder im Vollbildmodus darstellen (Standard nein).
 config_fotogallery_number_regex_error       = nur Zahlen erlaubt!
-config_fotogallery_copyright                = Copyright Information, die unter der Gallery sowie in der Einzeldarstellung angezeigt wird. (HTML ist erlaubt)
+config_fotogallery_copyright                = Copyright Information, die unter der Galerie sowie in der Einzeldarstellung angezeigt wird. (HTML ist erlaubt)
 config_fotogallery_idwithgalleryname        = &lt;div id="fotogalerie"&gt; um Galeriename erweitern. (Standard nein. Sinnvoll, wenn Mehrer Galerien auf einer Inhaltsseite verwendet werden).
 config_fotogallery_plugin_first             = Liefert das erste Foto der Galerie
 config_fotogallery_plugin_last              = Liefert das letzte Foto der Galerie
@@ -16,3 +16,4 @@ config_fotogallery_showDownloadLink         = Soll für die Fotos ein Download L
 config_fotogallery_showMaxLink              = Soll für die Fotos ein Maximieren Link angezeigt werden?
 config_fotogallery_plugin_single            = Zur Darstellung eines einzelnen Fotos, außerhalb einer Galerie
 config_fotogallery_plugin_count             = Liefert die Anzahl der Fotos der Galerie
+config_fotogallery_plugin_single            = Galerie mit allen Fotos, es wird jedoch nur das erste Foto als Vorschau angezeigt
